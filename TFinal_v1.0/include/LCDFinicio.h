@@ -12,27 +12,27 @@ void inicioLCD(uint8_t orientation) {
 	orient = orientation;
 	if (display_transfer_mode != 1)
 		//_set_direction_registers (display_transfer_mode);
-
 	//sbi(P_RST, B_RST);
 	//REG_PIOC_SODR=(REG_PIOC_SODR & 0b11111111111111111111110111111111) | 0b00000000000000000000001000000000; //PC9-RST
 	//gpioWrite(REST, ON);
 	HAL_GPIO_WritePin(REST.puerto, REST.pin, ON);
-	HAL_Delay(1);
+	//HAL_Delay(1);
 	//cbi(P_RST, B_RST);
 	//REG_PIOC_CODR=(REG_PIOC_CODR & 0b11111111111111111111110111111111) | 0b00000000000000000000001000000000; //PC9-RST
 	//gpioWrite(REST, OFF);
 	HAL_GPIO_WritePin(REST.puerto, REST.pin, OFF);
-	HAL_Delay(1);
+	//HAL_Delay(1);
 	//sbi(P_RST, B_RST);
 	//REG_PIOC_SODR=(REG_PIOC_SODR & 0b11111111111111111111110111111111) | 0b00000000000000000000001000000000; //PC9-RST
 	//gpioWrite(REST, ON);
 	HAL_GPIO_WritePin(REST.puerto, REST.pin, ON);
-	HAL_Delay(1);
+	//HAL_Delay(1);
 
 	//cbi(P_CS, B_CS);
 	//REG_PIOC_CODR=(REG_PIOC_CODR & 0b11111111111111111111111011111111) | 0b00000000000000000000000100000000; //PC8-CS
 	//gpioWrite(CS, OFF);
 	HAL_GPIO_WritePin(CS.puerto, CS.pin, OFF);
+	//HAL_Delay(1);
 
 	initlcd();
 
@@ -40,6 +40,7 @@ void inicioLCD(uint8_t orientation) {
 	//REG_PIOC_SODR=(REG_PIOC_SODR & 0b11111111111111111111111011111111) | 0b00000000000000000000000100000000; //PC8-CS
 	//gpioWrite(CS, ON);
 	HAL_GPIO_WritePin(CS.puerto, CS.pin, ON);
+	//HAL_Delay(1);
 
 	setColorb(255, 255, 255);
 	setBackColorb(0, 0, 0);
@@ -54,14 +55,14 @@ void initlcd(void) {
 	LCD_Write_DATA(0x04);
 	LCD_Write_COM(0xE0);
 	LCD_Write_DATA(0x01);	//habilito el reloj del pll
-	HAL_Delay(1);
+	//HAL_Delay(1);
 	//delay(10);
 	LCD_Write_COM(0xE0);	// PLL enable
 	LCD_Write_DATA(0x03);
-	HAL_Delay(1);
+	//HAL_Delay(1);
 	//delay_us(100);
 	LCD_Write_COM(0x01);    // software reset
-	HAL_Delay(5);
+	//HAL_Delay(1);
 	//delay_us(500);
 	LCD_Write_COM(0xE6);    //PLL setting for PCLK, pixel clock depends on resolution
 	LCD_Write_DATA(0x04);   //para 3.43mhz de clock
@@ -109,7 +110,7 @@ void initlcd(void) {
 	LCD_Write_COM(0xF0);    //pixel data interface Set the pixel data format to 8-bit / 9-bit / 12-bit / 16-bit / 16-bit(565) / 18-bit / 24-bit
 	LCD_Write_DATA(0x03);	//16bits
 
-	HAL_Delay(1);
+	//HAL_Delay(1);
 	//delay_us(100);
 
 	setXY(0, 0, 799, 479);	//

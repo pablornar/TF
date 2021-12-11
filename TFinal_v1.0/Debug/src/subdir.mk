@@ -4,21 +4,18 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/Driverlcd.c \
 ../src/Timer.c \
 ../src/_initialize_hardware.c \
 ../src/main.c \
 ../src/stm32f4xx_hal_msp.c 
 
 OBJS += \
-./src/Driverlcd.o \
 ./src/Timer.o \
 ./src/_initialize_hardware.o \
 ./src/main.o \
 ./src/stm32f4xx_hal_msp.o 
 
 C_DEPS += \
-./src/Driverlcd.d \
 ./src/Timer.d \
 ./src/_initialize_hardware.d \
 ./src/main.d \

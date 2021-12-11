@@ -73,10 +73,11 @@ src/main.o: ../src/main.c ../include/main.h \
  ../system/include/stm32f4-hal/stm32f4xx_hal_spdifrx.h \
  ../system/include/stm32f4-hal/stm32f4xx_hal_dfsdm.h \
  ../system/include/stm32f4-hal/stm32f4xx_hal_lptim.h \
- ../include/Driverlcd.h ../include/Timer.h ../include/displaygraf.h \
- ../include/LCDFonts.h ../include/LCDFconfiguracion.h \
- ../include/LCDFcomandos.h ../include/LCDFinicio.h \
- ../include/LCDFgraficos.h
+ ../include/Driverlcd.h ../include/DriverTouchlcd.h ../include/Timer.h \
+ ../include/displaygraf.h ../include/LCDFonts.h \
+ ../include/LCDFconfiguracion.h ../include/LCDFcomandos.h \
+ ../include/LCDFinicio.h ../include/LCDFgraficos.h \
+ ../include/displaytouch.h ../include/TouchLCDconfiguracion.h
 
 ../include/main.h:
 
@@ -234,6 +235,8 @@ src/main.o: ../src/main.c ../include/main.h \
 
 ../include/Driverlcd.h:
 
+../include/DriverTouchlcd.h:
+
 ../include/Timer.h:
 
 ../include/displaygraf.h:
@@ -247,3 +250,7 @@ src/main.o: ../src/main.c ../include/main.h \
 ../include/LCDFinicio.h:
 
 ../include/LCDFgraficos.h:
+
+../include/displaytouch.h:
+
+../include/TouchLCDconfiguracion.h:

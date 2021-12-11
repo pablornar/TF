@@ -12,6 +12,7 @@
 #include "diag/Trace.h"
 #include "cmsis_device.h"
 #include "Driverlcd.h"
+#include "DriverTouchlcd.h"
 #include "Timer.h"
 // ----------------------------------------------------------------------------
 

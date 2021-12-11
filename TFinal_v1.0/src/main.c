@@ -5,6 +5,7 @@
 // ----------------------------------------------------------------------------
 #include "main.h"
 #include "displaygraf.h"	//libreria general del display
+#include "displaytouch.h"	//libreria Touch general del display
 
 // ----------------------------------------------------------------------------
 //+++++++++++++++++++++variables de display
@@ -21,10 +22,12 @@ extern TIM_HandleTypeDef htim1;
 extern UART_HandleTypeDef huart1;
 extern ADC_HandleTypeDef hadc1;
 uint32_t cont = 0;
-uint32_t Fmuestreo = 1000000;
+uint32_t Fmuestreo = 10000;
 uint16_t datostx=101;
 uint16_t ADCread=0;
-
+int valortouch;
+uint16_t valorx;
+uint16_t valory;
 
 
 // ----- main() ---------------------------------------------------------------
@@ -39,7 +42,11 @@ int main(int argc, char* argv[])
 
 	  /*configura lcd y selecciona el modelo*/
 	  	Conflcd(CTE70, 38, 39, 40, 41);	//configura RS, WR, CS y rest pero no se usan por ahora vienen por defecto
+	  	Touch(43, 45, 47, 49, 51); //tclk, tcs, tdin, dout e irq
+	  	InitTouch(LANDSCAPE);
+	  	setPrecision(PREC_MEDIUM);
 	  	inicioLCD(LANDSCAPE); //inicializa LCD
+
 	  	setFont(BigFont); //configura letra pantalla
 	  	clrScr();  //borra lcd
 
@@ -48,7 +55,7 @@ int main(int argc, char* argv[])
 	  	valor=3.3/2;
 
 
-	//timer_start();
+	  	//timer_start();
 
 	  uint32_t seconds = 0;
 	 //HAL_TIM_Base_Start_IT(&htim1);
@@ -72,24 +79,41 @@ int main(int argc, char* argv[])
 		HAL_Delay(500);
 		drawRectangulo(200,100,500,200);
 		HAL_Delay(500);
-		drawRoundRect(200,300,500,400);
-		//delay(500);
 		//setBackColor(VGA_BLUE);
-		//drawfillRect(200,100,500,200);
-		//delay(500);
-		//drawCircle(300,300,50);
-		//delay(500);
 		//setColor(VGA_BLUE);
-		//drawfillCircle(300,300,50);
+		//drawfillRect(200,100,500,200);		//no esta funcionando
+		//HAL_Delay(500);
+		drawRoundRect(200,300,500,400);
 		HAL_Delay(500);
+		drawCircle(600,300,50);
+		HAL_Delay(500);
+		setColor(VGA_BLUE);
+		drawfillCircle(600,300,48);
+		HAL_Delay(500);
+		setColor(VGA_RED);
 		print("hola",300,400,90);
 		HAL_Delay(500);
 		printNumI(12,700,400,2,0);
 		HAL_Delay(500);
+
+		HAL_ADC_Start(&hadc1);
+		while (HAL_ADC_PollForConversion(&hadc1, 255) != HAL_OK); //check if conversion is completed
+		ADCread=HAL_ADC_GetValue(&hadc1);
+		valor = (3.3 * ADCread)/4095;
+
 		printNumF(valor,4,550,400,'.',4,' ');
 		HAL_Delay(500);
-		clrScr();
+		valortouch=dataAvailable();
+		//printNumI(dataAvailable(),700,200,1,0);
+		if (valortouch==1){
+			readtouch();
+			valorx=getX();
+			valory=getY();
+			printNumI(valorx,600,200,1,0);
+			printNumI(valory,700,200,1,0);
+    	}
 		HAL_Delay(500);
+		clrScr();
     }
 }
 

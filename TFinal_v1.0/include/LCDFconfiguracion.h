@@ -34,6 +34,75 @@ void Conflcd(int model, int RS, int WR, int CS, int REST) {
 		_set_direction_registers (display_transfer_mode); //habilita los pines del micro
 
 	}
+
+/*
+
+			HAL_GPIO_WritePin(D0.puerto, D0.pin, ON);
+
+			HAL_GPIO_WritePin(D1.puerto, D1.pin, ON);
+
+			HAL_GPIO_WritePin(D2.puerto, D2.pin, ON);
+
+			HAL_GPIO_WritePin(D3.puerto, D3.pin, ON);
+
+			HAL_GPIO_WritePin(D4.puerto, D4.pin, ON);
+
+			HAL_GPIO_WritePin(D5.puerto, D5.pin, ON);
+
+			HAL_GPIO_WritePin(D6.puerto, D6.pin, ON);
+
+			HAL_GPIO_WritePin(D7.puerto, D7.pin, ON);
+
+			HAL_GPIO_WritePin(D8.puerto, D8.pin, ON);
+
+			HAL_GPIO_WritePin(D9.puerto, D9.pin, ON);
+
+			HAL_GPIO_WritePin(D10.puerto, D10.pin, ON);
+
+			HAL_GPIO_WritePin(D11.puerto, D11.pin, ON);
+
+			HAL_GPIO_WritePin(D12.puerto, D12.pin, ON);
+
+			HAL_GPIO_WritePin(D13.puerto, D13.pin, ON);
+
+			HAL_GPIO_WritePin(D14.puerto, D14.pin, ON);
+
+			HAL_GPIO_WritePin(D15.puerto, D15.pin, ON);
+
+
+
+		HAL_GPIO_WritePin(D0.puerto, D0.pin, OFF);
+
+		HAL_GPIO_WritePin(D1.puerto, D1.pin, OFF);
+
+		HAL_GPIO_WritePin(D2.puerto, D2.pin, OFF);
+
+		HAL_GPIO_WritePin(D3.puerto, D3.pin, OFF);
+
+		HAL_GPIO_WritePin(D4.puerto, D4.pin, OFF);
+
+		HAL_GPIO_WritePin(D5.puerto, D5.pin, OFF);
+
+		HAL_GPIO_WritePin(D6.puerto, D6.pin, OFF);
+
+		HAL_GPIO_WritePin(D7.puerto, D7.pin, OFF);
+
+		HAL_GPIO_WritePin(D8.puerto, D8.pin, OFF);
+
+		HAL_GPIO_WritePin(D9.puerto, D9.pin, OFF);
+
+		HAL_GPIO_WritePin(D10.puerto, D10.pin, OFF);
+
+		HAL_GPIO_WritePin(D11.puerto, D11.pin, OFF);
+
+		HAL_GPIO_WritePin(D12.puerto, D12.pin, OFF);
+
+		HAL_GPIO_WritePin(D13.puerto, D13.pin, OFF);
+
+		HAL_GPIO_WritePin(D14.puerto, D14.pin, OFF);
+
+		HAL_GPIO_WritePin(D15.puerto, D15.pin, OFF);
+		*/
 }
 
 void _set_direction_registers(uint8_t mode) {  //no lo uso es para el micro arm cortex m3
@@ -165,6 +234,7 @@ void LCD_Writ_Bus(char VH, char VL, uint8_t mode) {
 	//REG_PIOC_CODR=(REG_PIOC_CODR & 0b11111111111111111111111101111111) | 0b00000000000000000000000010000000; //PC7-WR
 	//gpioWrite(WR, ON);
 	HAL_GPIO_WritePin(WR.puerto, WR.pin, ON);
+	//HAL_Delay(1);
 	//delayMicroseconds(1); //retardo minimo de 12nseg
 	//REG_PIOC_SODR=(REG_PIOC_SODR & 0b11111111111111111111111101111111) | 0b00000000000000000000000010000000; //PC7-WR
 	//gpioWrite(WR, OFF);
@@ -175,6 +245,7 @@ void LCD_Write_DATA(char VL) {		//no lo uso es para otro modelo de display de 8b
 	//sbi(P_RS, B_RS); pone en 1 RS
 	//gpioWrite(RS, ON);
 	HAL_GPIO_WritePin(RS.puerto, RS.pin, ON);
+	//HAL_Delay(1);
 	//REG_PIOC_SODR=(REG_PIOC_SODR & 0b11111111111111111111111110111111) | 0b00000000000000000000000001000000; //PC6-RS
 	LCD_Writ_Bus(0x00, VL, display_transfer_mode);
 }
@@ -183,6 +254,7 @@ void LCD_Write_COM(char VL) {
 	//cbi(P_RS, B_RS); para poner a cero el pin RS
 	//gpioWrite(RS, OFF);
 	HAL_GPIO_WritePin(RS.puerto, RS.pin, OFF);
+	//HAL_Delay(1);
 	//REG_PIOC_CODR=(REG_PIOC_CODR & 0b11111111111111111111111110111111) | 0b00000000000000000000000001000000; //PC6-RS
 	LCD_Writ_Bus(0x00, VL, display_transfer_mode);
 }
@@ -191,6 +263,7 @@ void LCD_Write_DATAb(char VH, char VL) {
 	//sbi(P_RS, B_RS);
 	//gpioWrite(RS, ON);
 	HAL_GPIO_WritePin(RS.puerto, RS.pin, ON);
+	//HAL_Delay(1);
 	//REG_PIOC_SODR=(REG_PIOC_SODR & 0b11111111111111111111111110111111) | 0b00000000000000000000000001000000; //PC6-RS
 	LCD_Writ_Bus(VH, VL, display_transfer_mode);
 }
