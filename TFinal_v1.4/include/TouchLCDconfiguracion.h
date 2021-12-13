@@ -54,7 +54,7 @@ void InitTouch(uint8_t orientation)
 	//sbi(P_DIN, B_DIN);
 	HAL_GPIO_WritePin(T_DIN.puerto, T_DIN.pin, ON);
 	//sbi(P_IRQ, B_IRQ);
-	HAL_GPIO_WritePin(T_DIN.puerto, T_DIN.pin, ON);
+	//HAL_GPIO_WritePin(T_DIN.puerto, T_DIN.pin, ON);
 }
 
 
@@ -85,8 +85,8 @@ void readtouch()
 			temp_x=touch_ReadData();
 
 			//if (!rbi(P_IRQ, B_IRQ))
-			if(!HAL_GPIO_ReadPin(T_IRQ.puerto, T_IRQ.pin))
-			{
+			//if(!HAL_GPIO_ReadPin(T_IRQ.puerto, T_IRQ.pin))
+			//{
 				touch_WriteData(0xD0);
 				//pulse_high(P_CLK, B_CLK);
 				HAL_GPIO_WritePin(T_CLK.puerto, T_CLK.pin, ON);
@@ -110,7 +110,7 @@ void readtouch()
 					}
 					datacount++;
 				}
-			}
+			//}
 		}
 	}
 	//pinMode(T_IRQ,  OUTPUT); vv*****************ver si hace falta cambiar de input a output

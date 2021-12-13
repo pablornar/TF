@@ -78,9 +78,9 @@ src/main.o: ../src/main.c ../include/main.h \
  ../include/LCDFconfiguracion.h ../include/LCDFcomandos.h \
  ../include/LCDFinicio.h ../include/LCDFgraficos.h \
  ../include/DriverTouchlcd.h ../include/displaytouch.h \
- ../include/TouchLCDconfiguracion.h ../include/Driverbuttons.h \
- ../include/displaybuttons.h ../include/Buttonsconfiguracion.h \
- ../include/Timer.h
+ ../include/ButtonsFonts.h ../include/TouchLCDconfiguracion.h \
+ ../include/Driverbuttons.h ../include/displaybuttons.h \
+ ../include/Buttonsconfiguracion.h ../include/Timer.h
 
 ../include/main.h:
 
@@ -253,6 +253,8 @@ src/main.o: ../src/main.c ../include/main.h \
 ../include/DriverTouchlcd.h:
 
 ../include/displaytouch.h:
+
+../include/ButtonsFonts.h:
 
 ../include/TouchLCDconfiguracion.h:
 

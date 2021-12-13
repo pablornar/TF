@@ -10,7 +10,7 @@
 #define DISPLAYTOUCH_H_
 
 #include "cmsis_device.h"
-
+#include "ButtonsFonts.h"
 
 //POR DEFECTO
 /*#define CAL_X 0x00378F66UL
@@ -40,9 +40,19 @@
 
 
 //DEL DISPLAY GRANDE 7
+#define CAL_X 0x00100FB2UL
+#define CAL_Y 0x00604F72UL
+#define CAL_S 0x8031F1DFUL
+
+/*
+#define CAL_X 0x000FCFC0UL
+#define CAL_Y 0x00628F62UL
+#define CAL_S 0x8031F1DFUL
+
 #define CAL_X 0x000DCFB7UL
 #define CAL_Y 0x00574F5BUL
 #define CAL_S 0x8031F1DFUL
+*/
 
 
 #define PORTRAIT			0

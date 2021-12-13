@@ -1,12 +1,14 @@
 /*
- * Programa para probar los timer, el systick, el uart y el conversor ad.
- * fecha: 06/12/2021
+ * Programa Trabajo final de la Especialidad en Sistemas Embebidos
+ * version; 1.4
+ * fecha inicio: 06/12/2021
+ * fecha presentacion: xx/xx/2022
+ * Observaciones:
  */
-// ----------------------------------------------------------------------------
+
+//---------------------Librerias-------------------------------------------------------
 #include "main.h"
 
-
-// ----------------------------------------------------------------------------
 //+++++++++++++++++++++variables de display
 extern uint8_t SmallFont[];
 extern uint8_t BigFont[];
@@ -18,7 +20,7 @@ float valor;
 int but1,but2,but3,but4,but5,but6,but7,but8;
 int boton;
 
-//Variables
+//********Variables Globales
 extern TIM_HandleTypeDef htim1;
 extern UART_HandleTypeDef huart1;
 extern ADC_HandleTypeDef hadc1;
@@ -34,42 +36,43 @@ uint16_t valory;
 // ----- main() ---------------------------------------------------------------
 int main(int argc, char* argv[])
 {
-	  // Send a greeting to the trace device (skipped on Release).
-	  trace_puts("Inico de programa");
-	  // At this stage the system clock should have already been configured
-	  // at high speed.
-	  trace_printf("System clock: %u Hz\n", SystemCoreClock);
+	// Send a greeting to the trace device (skipped on Release).
+	trace_puts("Inico de programa");
+	// At this stage the system clock should have already been configured
+	// at high speed.
+	trace_printf("System clock: %u Hz\n", SystemCoreClock);
+
+	/*configura lcd y selecciona el modelo*/
+	Conflcd(CTE70, 38, 39, 40, 41);	//configura RS, WR, CS y rest pero no se usan por ahora vienen por defecto
+	Touch(43, 45, 47, 49, 51); 	//tclk, tcs, tdin, dout e irq
+	inicioLCD(LANDSCAPE); 		//inicializa LCD
+	InitTouch(LANDSCAPE);		//inicializa el touch
+	setPrecision(PREC_MEDIUM);	// setea la precision del touch
+
+	UTFT_Buttons();				//inicializa los botones
+	setFont(BigFont); 			//configura letra pantalla
+	setTextFont(BigFont); 		//configura letra de botones
+	setSymbolFont(Dingbats1_XL); //
+	clrScr();  					//borra lcd
 
 
-	  /*configura lcd y selecciona el modelo*/
-	  	Conflcd(CTE70, 38, 39, 40, 41);	//configura RS, WR, CS y rest pero no se usan por ahora vienen por defecto
-	  	Touch(43, 45, 47, 49, 51); //tclk, tcs, tdin, dout e irq
-	  	InitTouch(LANDSCAPE);
-	  	setPrecision(PREC_MEDIUM);
-	  	inicioLCD(LANDSCAPE); //inicializa LCD
-	  	UTFT_Buttons();
-	  	setFont(BigFont); //configura letra pantalla
-	  	setTextFont(BigFont); //configura letra de botones
-	  	clrScr();  //borra lcd
+	HAL_Delay(1000);
+	valor=3.3/2;
 
+	deleteAllButtons();		//borra los botones que pudieren quedar
+	setButtonColors(VGA_WHITE, VGA_MAROON, VGA_LIME, VGA_YELLOW, VGA_TEAL); //setea color de botones
+	but1 = addButton(15,30, 200,  60, "Encendido",0);						//crea el primer boton
+	but2 = addButton(300,30, 200,  60, "Salir",0);							//crea el segundo boton
+	drawButtons();															//dibuja los botones creados
 
-	  	HAL_Delay(1000);
-	  	valor=3.3/2;
-
-	  	deleteAllButtons();
-	  	setButtonColors(VGA_WHITE, VGA_MAROON, VGA_LIME, VGA_YELLOW, VGA_TEAL);
-	  	//timer_start();
-
-	  	but1 = addButton(15,30, 200,  60, "Encendido",0);
-	  	but2 = addButton(300,30, 200,  60, "Salir",0);
-	  	drawButtons();
-	  uint32_t seconds = 0;
-	 //HAL_TIM_Base_Start_IT(&htim1);
-	 //__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
-	  //HAL_ADC_Start(&hadc1);
-  while (1)
-    {
-	  /*
+	//timer_start();
+	uint32_t seconds = 0;
+	//HAL_TIM_Base_Start_IT(&htim1);
+	//__HAL_TIM_SET_COUNTER(&htim1,0);  // set the counter value a 0
+	//HAL_ADC_Start(&hadc1);
+	while (1)
+	{
+		/*
 	  	setColor(VGA_GREEN);
 		drawPixel(380, 470);
 		HAL_Delay(500);
@@ -110,8 +113,10 @@ int main(int argc, char* argv[])
 
 		printNumF(valor,4,550,400,'.',4,' ');
 		HAL_Delay(500);
-		*/
-	    setColor(VGA_RED);
+		 */
+
+
+		setColor(VGA_RED);
 		valortouch=dataAvailable();
 		//printNumI(dataAvailable(),700,200,1,0);
 		if (valortouch==1){
@@ -136,15 +141,25 @@ int main(int argc, char* argv[])
 				drawButtons();
 			}
 
-    	}
+		}
 		HAL_Delay(100);
 		//clrScr();
-    }
+
+		/*
+						readtouch();
+						valorx=getX();
+						valory=getY();
+						printNumI(TP_X,600,200,1,5);
+						printNumI(TP_Y,700,200,1,5);
+						printNumI(valorx,600,300,1,5);
+						printNumI(valory,700,300,1,5);
+		*/
+	}
 }
 
 #pragma GCC diagnostic pop
 
-// ----------------------------------------------------------------------------
+
 /*
  * Funciona para realizar el muestreo
  */
