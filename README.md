@@ -8,7 +8,7 @@ Driver de TFT, Touch calibrado y botones funcionando.
 Timer, systick, Uart,  conversor AD y DAC funcionando. 
 
 # Osciloscopio 
-Funcionando, mide frecuencia por systick y FFT faltaria medir la frecuencia con timer, trigger funcionando y mide VP+ y-
+Funcionando, mide frecuencia por systick y FFT faltaria medir la frecuencia con timer, trigger funcionando y mide VP+ y VP-.
 
 y agregar el codigo del dac para la ganancia.
 
