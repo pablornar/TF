@@ -15,7 +15,7 @@ y agregar el codigo del dac para la ganancia.
 # Analizador de Espectro
 Funcionando se agrego busqueda de maximo y frecuencia. Faltaria calcular el ancho de banda y el codigo del DAC para la ganancia.
 
-#Filtros
+# Filtros
 Filtros funcionando LP, HP, BP y BR. Falta agregar un menu de configuracion de frecuencias de cortes, muestreo tipo de ventana, etc.
 
 
